@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    env_file:
+      - .env
+    volumes:
+      - bicycles-mysql-db:/var/lib/mysql
+    ports:
+      - "3306:3306" # Change the first number for different port
+    networks:
+      - bicycles-network
+  api:
+    image: bicycles_api
+    build: .
+    env_file:
+      - .env
+    ports:
+      #- "443:443" # Change the first number for different port
+      - "8080:8080" 
+    expose:
+      #- "443" # 443 is default for https
+      - "8080"
+    networks:
+      - bicycles-network
+    depends_on:
+      db:
+        condition: service_healthy
+      
+volumes:
+  bicycles-mysql-db:
+    driver: local
+
+networks:
+  bicycles-network:
+    driver: bridge

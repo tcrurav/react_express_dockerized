@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    ports:
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx
+    restart: always
+
+# services:
+#   bicycles_app:
+#     image: bicycles_app
+#     build:
+#       context: .
+#       dockerfile: ./dockerfile
+#     environment:
+#       NODE_ENV: production
+#     ports:
+#       - 443:443
+
+# services:
+#   app:
+#     image: bicycles_app
+#     # tty: true
+#     build: .
+#     env_file:
+#       - .env
+#     ports: 
+#       - '80:80'
+#     expose:
+#       - '80'
+#     # stdin_open: true
+#     networks:
+#       - bicycles-app-network
+
+# networks:
+#   bicycles-app-network:
+#     driver: bridge

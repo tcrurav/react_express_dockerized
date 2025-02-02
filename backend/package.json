@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "////////////////////////// - 3": "COMMENT: ATTENTION!!! db:reset & db:reset-and-start will reset XREATE database",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:reset-and-start": "npm run db:reset && npm start",
+    "////////////////////////// - 4": "COMMENT: Normal use scripts to migrate and start XREATE backend",
+    "db:migrate-and-start": "npx sequelize-cli db:migrate && npm start",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.4",
+    "sequelize-cli": "^6.6.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

@@ -1,0 +1,36 @@
+FROM node AS builder
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+
+# RUN npm i -g serve
+
+# Bundle app source
+COPY . .
+
+RUN npm run build
+
+# Usar Nginx para servir la aplicación con HTTPS
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /app/dist .
+
+# Copiar certificados al contenedor
+COPY certs/cert.pem /etc/nginx/cert.pem
+COPY certs/key.pem /etc/nginx/key.pem
+
+# Configurar Nginx para usar HTTPS
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Use other port if not using https
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]
