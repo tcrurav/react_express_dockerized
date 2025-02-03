@@ -1,28 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
-// https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
+import fs from 'node:fs'
 
 export default defineConfig({
   base: "/",
   plugins: [react()],
-  // preview: {
-  //  port: 8088,
-  //  strictPort: true,
-  // },
   server: {
     https: {
-      key: fs.readFileSync('./certs/key.pem'), 
-      cert: fs.readFileSync('./certs/cert.pem'),
+      key: fs.readFileSync('./certs/privkey.pem'), 
+      cert: fs.readFileSync('./certs/fullchain.pem'),
     },
     host: '0.0.0.0',
     port: 443
-  //  port: 8088,
-  //  strictPort: true,
-  //  host: true,
-  //  origin: "http://0.0.0.0:8088",
   },
  });

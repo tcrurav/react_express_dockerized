@@ -21,6 +21,10 @@ This project contains 2 different parts:
 * Frontend
 * Backend
 
+You need cert files to run this project in production. If you do it with IsardVDI then follow this instructions: https://isard.gitlab.io/isardvdi-docs/user/bastion.es/
+
+I have tested it successfully with Ubuntu 22.04 LTS, creating 2 desktops: one for the backend and another for the frontend.
+
 ### In your Backend:
 
 Once you have downloaded your project copy the .env.example to .env and config all necesary:
@@ -30,7 +34,9 @@ cd react_express_dockerized/backend
 cp .env.example .env
 ```
 
-after that run your docker:
+Remember to put the cert files routes in .env. In my case I just have let both files on the backend directory.
+
+After that run your docker-compose.yml file:
 
 ```
 cd react_express_dockerized/backend
@@ -49,14 +55,20 @@ cd react_express_dockerized/frontend
 cp .env.example .env
 ```
 
-after that run your docker:
+Put your cert files in the directory frontend/certs
+
+Put your frontend domain in nginx.conf
+
+Review that the cert files names are correctly added in vite.config.js
+
+Review that your dockerfile is correctly configured specially the cert files.
+
+After that run your docker-compose.yml file:
 
 ```
 cd react_express_dockerized/backend
 docker compose up --build -d
 ```
-
-uncomment line 23 and comment line 20 in file backend/dockerfile so that next time your database doesn't get resetted.
 
 If you follow the former instructions the 2 different parts of this project will be running on the following urls:
 * Backend (https://yourbackenddomain)
@@ -73,5 +85,6 @@ Enjoy!!!
 
 ## Acknowledgements
 
+* https://isard.gitlab.io/isardvdi-docs/user/bastion.es/. How to use a bastion with IsardVDI.
 * https://gist.github.com/PurpleBooth/109311bb0361f32d87a2. A very complete template for README.md files.
 * https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines. Guidelines to write properly git commit messages.
