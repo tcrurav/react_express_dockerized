@@ -23,21 +23,40 @@ This project contains 2 different parts:
 
 ### In your Backend:
 
-You can use Docker for your backend. Once you have downloaded your project:
+Once you have downloaded your project copy the .env.example to .env and config all necesary:
 
 ```
 cd react_express_dockerized/backend
-docker-compose up -d
+cp .env.example .env
 ```
+
+after that run your docker:
+
+```
+cd react_express_dockerized/backend
+docker compose up --build -d
+```
+
+uncomment line 23 and comment line 20 in file backend/dockerfile so that next time your database doesn't get resetted.
+
 
 ### In your Frontend:
 
-You can use Docker for your backend. Once you have downloaded your project:
+Once you have downloaded your project copy the .env.example to .env and config all necesary:
+
+```
+cd react_express_dockerized/frontend
+cp .env.example .env
+```
+
+after that run your docker:
 
 ```
 cd react_express_dockerized/backend
-docker-compose up -d
+docker compose up --build -d
 ```
+
+uncomment line 23 and comment line 20 in file backend/dockerfile so that next time your database doesn't get resetted.
 
 If you follow the former instructions the 2 different parts of this project will be running on the following urls:
 * Backend (https://yourbackenddomain)
